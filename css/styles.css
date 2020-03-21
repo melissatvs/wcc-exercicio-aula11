@@ -49,6 +49,10 @@ input[type="text"] {
   background: green;
 }
 
+.botao-editar {
+  background: blue;
+}
+
 
 .botao-deletar-tudo {
   background: red;
@@ -78,7 +82,16 @@ li {
 
 .deletar {
   color: red;
-  padding: 5px;
+  padding: 2px;
+  border: 1px solid;
+  height: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editar {
+  color: blue;
+  padding: 2px;
   border: 1px solid;
   height: 20px;
   border-radius: 5px;

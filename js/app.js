@@ -15,9 +15,14 @@ const botaoDeletar = document.querySelector("#remover-lista")
 
 // escuta o evento de click no botao de adicionar
 botaoAdicionar.addEventListener("click", function () {
-  // chama função adicionaNaLista passando o valor do campo de texto
-  objetoLista.adicionaItem(campoTexto.value);
-  // limpa o campo de texto adicionando uma string vazia
+
+  if (botaoAdicionar.classList.contains("botao-adicionar")) {
+    objetoLista.adicionaItem(campoTexto.value)
+  } else if (botaoAdicionar.classList.contains("botao-editar")) {
+    // TODO item ainda fixo, tem que salvar de algum jeito o id
+    objetoLista.editarItemDaLista(5, campoTexto.value)
+  }
+
   campoTexto.value = ''
   // chama função monta lista
   objetoLista.montaLista()
@@ -30,11 +35,19 @@ botaoDeletar.addEventListener("click", function () {
   objetoLista.deletarLista();
 })
 
-// escuta o click no elemento da lista de compras
-// irá deletar apenas UM ITEM DA LISTA
 listaDeCompras.addEventListener("click", function (event) {
-  // chama a função deletarItemDaLista passando o parametro event
-  objetoLista.deletarItemDaLista(event)
+  
+  const itemClicado = event.target.previousSibling.previousElementSibling
+  
+  if (event.target.classList.contains("deletar")) {
+    objetoLista.deletarItemDaLista(event)
+  } else if (event.target.classList.contains("editar")) {
+    campoTexto.value = itemClicado.innerText
+    botaoAdicionar.classList.remove("botao-adicionar")
+    botaoAdicionar.classList.add("botao-editar")
+    botaoAdicionar.innerText = "Gravar"    
+  }  
+  
 })
 
 window.addEventListener("DOMContentLoaded", () => {
